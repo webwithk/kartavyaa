@@ -7,9 +7,12 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
 
   try {
-    const { data, error } = await supabase
+    const response= await supabase
         .from('portfolio_expertise')
         .select('*')
+
+        console.log("FULL RESPONSE:", response)
+        const { data, error } = response;
 
         console.log("DATA:", data)
         console.log("ERROR:", error)
