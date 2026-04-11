@@ -7,17 +7,12 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
 
   try {
-    if (req.method === 'GET') {
-      const { data, error } = await supabase
+    const { data, error } = await supabase
         .from('portfolio_expertise')
         .select('*')
-        .order('id', { ascending: true });
-      if (error) throw error;
-      return res.status(200).json(data);
-    }
-    res.status(405).json({ error: 'Method not allowed' });
+
+        console.log("DATA:", data)
+        console.log("ERROR:", error)
   } catch (err) {
-    console.error('API error:', err);
-    res.status(500).json({ error: err.message });
-  }
+    console.log("CATCH ERROR:", err)}
 }
