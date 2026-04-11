@@ -1,4 +1,4 @@
-import supabase from './_supabase.js';
+import { supabase } from './_supabase.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -11,11 +11,13 @@ export default async function handler(req, res) {
         .from('portfolio_expertise')
         .select('*')
 
-        console.log("FULL RESPONSE:", response)
+        console.log("env:", import.meta.env)
+
+        console.log("full response:", response)
         const { data, error } = response;
 
-        console.log("DATA:", data)
-        console.log("ERROR:", error)
+        console.log("data:", data)
+        console.log("error:", error)
   } catch (err) {
     console.log("CATCH ERROR:", err)}
 }
