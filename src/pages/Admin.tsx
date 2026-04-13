@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import supabase from '../lib/supabase';
+import { supabase } from '../lib/supabase.ts';
 import { LogOut, Edit2, Trash2, Save, X, MessageSquare } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 
