@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   try {
     if (req.method === 'GET') {
       const { data, error } = await supabase
-        .from('projects')
+        .from('portfolio_projects')
         .select('*')
         .order('id', { ascending: true });
 
