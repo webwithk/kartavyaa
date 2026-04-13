@@ -1,4 +1,4 @@
-import { supabase } from './_supabase.js';
+﻿import supabase from './_supabase.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -7,17 +7,19 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
 
   try {
-    const response= await supabase
+    if (req.method === 'GET') {
+      const { data, error } = await supabase
         .from('portfolio_expertise')
         .select('*')
+        .order('id', { ascending: true });
 
-        console.log("env:", import.meta.env)
+      if (error) throw error;
+      return res.status(200).json(data);
+    }
 
-        console.log("full response:", response)
-        const { data, error } = response;
-
-        console.log("data:", data)
-        console.log("error:", error)
+    return res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
-    console.log("CATCH ERROR:", err)}
+    console.error('API error:', err);
+    return res.status(500).json({ error: err.message });
+  }
 }

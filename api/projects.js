@@ -1,4 +1,4 @@
-import supabase from './_supabase.js';
+﻿import supabase from './_supabase.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,15 +9,17 @@ export default async function handler(req, res) {
   try {
     if (req.method === 'GET') {
       const { data, error } = await supabase
-        .from('portfolio_projects')
+        .from('projects')
         .select('*')
         .order('id', { ascending: true });
+
       if (error) throw error;
       return res.status(200).json(data);
     }
-    res.status(405).json({ error: 'Method not allowed' });
+
+    return res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
     console.error('API error:', err);
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 }
