@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 interface Project {
   id: number;
@@ -18,9 +19,16 @@ export default function Portfolio() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch('/api/projects');
-        const data = await res.json();
-        setProjects(data);
+        const { data, error } = await supabase
+          .from('portfolio_projects')
+          .select('*')
+          .order('id', { ascending: true });
+
+        if (error) {
+          console.error('Error fetching projects:', error);
+        } else {
+          setProjects(data);
+        }
       } catch (err) {
         console.error('Error fetching projects:', err);
       } finally {

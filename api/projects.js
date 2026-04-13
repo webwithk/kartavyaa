@@ -1,68 +1,25 @@
-﻿import { useEffect, useState } from "react"
-import { supabase } from "@/lib/supabase"
+﻿import  { supabase } from '@/lib/supabase.ts';
 
-function Projects() {
-  const [projects, setProjects] = useState([])
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') return res.status(204).end();
 
-  useEffect(() => {
-    fetchProjects()
-  }, [])
+  try {
+    if (req.method === 'GET') {
+      const { data, error } = await supabase
+        .from('portfolio_projects')
+        .select('*')
+        .order('id', { ascending: true });
 
-  const fetchProjects = async () => {
-    const { data, error } = await supabase
-      .from('portfolio_projects')
-      .select('*')
-
-    if (error) {
-      console.error("Error fetching projects:", error)
-      return
+      if (error) throw error;
+      return res.status(200).json(data);
     }
 
-    console.log("Projects Data:", data)
-
-    setProjects(data || [])
+    return res.status(405).json({ error: 'Method not allowed' });
+  } catch (err) {
+    console.error('API error:', err);
+    return res.status(500).json({ error: err.message });
   }
-
-  return (
-    <div>
-      <h2>Projects</h2>
-
-      {projects.length === 0 ? (
-        <p>No projects found</p>
-      ) : (
-        projects.map((item) => (
-          <div key={item.id} style={{ marginBottom: "20px" }}>
-            
-            <h3>{item.title}</h3>
-            
-            <p>{item.description}</p>
-
-            {/* Image */}
-            {item.image_url && (
-              <img 
-                src={item.image_url} 
-                alt={item.title} 
-                width="200"
-              />
-            )}
-
-            {/* Tags */}
-            {item.tags && (
-              <p><strong>Tags:</strong> {item.tags}</p>
-            )}
-
-            {/* Demo Link */}
-            {item.demo_url && (
-              <a href={item.demo_url} target="_blank">
-                View Demo
-              </a>
-            )}
-
-          </div>
-        ))
-      )}
-    </div>
-  )
 }
-
-export default Projects

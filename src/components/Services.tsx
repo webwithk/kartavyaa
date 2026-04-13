@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 interface Service {
   id: number;
@@ -17,9 +18,16 @@ export default function Services() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await fetch('/api/services');
-        const data = await res.json();
-        setServices(data);
+        const { data, error } = await supabase
+          .from('portfolio_services')
+          .select('*')
+          .order('id', { ascending: true });
+
+        if (error) {
+          console.error('Error fetching services:', error);
+        } else {
+          setServices(data);
+        }
       } catch (err) {
         console.error('Error fetching services:', err);
       } finally {

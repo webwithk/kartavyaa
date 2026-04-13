@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 interface ExpertiseItem {
   id: number;
@@ -16,9 +17,15 @@ export default function Expertise() {
   useEffect(() => {
     const fetchExpertise = async () => {
       try {
-        const res = await fetch('/api/expertise');
-        const data = await res.json();
-        setExpertise(data);
+        const { data, error } = await supabase
+          .from('portfolio_expertise')
+          .select('*');
+
+        if (error) {
+          console.error('Error fetching expertise:', error);
+        } else {
+          setExpertise(data);
+        }
       } catch (err) {
         console.error('Error fetching expertise:', err);
       } finally {
