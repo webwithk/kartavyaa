@@ -13,8 +13,5 @@ return (
   );
 }
 
-console.log("SUPABASE URL:", import.meta.env.VITE_SUPABASE_URL);
-console.log("SUPABASE ANON KEY:", import.meta.env.VITE_SUPABASE_ANON_KEY);
-console.log("projects");
 
 export default App;
