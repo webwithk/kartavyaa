@@ -1,22 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
-import { useEffect } from "react";
-import { testSupabaseConnection } from "./utils/testSupabase";
 
 function App() {
-
-  useEffect(() => {
-    testSupabaseConnection();
-  }, []);
-  return (
-    <div>
-      <h1>Testing Supabase...</h1>
-    </div>
-  );
-
-
-  return (
+return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
