@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from '../lib/supabase';
 
 interface Stat {
   id: number;
@@ -14,9 +15,16 @@ export default function About() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch('/api/stats');
-        const data = await res.json();
-        setStats(data);
+        const { data, error } = await supabase
+          .from('portfolio_stats')
+          .select('*');
+
+        if (error) {
+          console.error('Error fetching stats:', error);
+        } else {
+          setStats(data);
+        }
+
       } catch (err) {
         console.error('Error fetching stats:', err);
       } finally {
