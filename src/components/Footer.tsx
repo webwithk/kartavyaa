@@ -1,4 +1,4 @@
-import { Github, MessageCircle, Instagram } from 'lucide-react';
+import { MessageCircle, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,7 +21,6 @@ export default function Footer() {
           
           <div className="flex items-center gap-4">
             {[
-              { icon: Github, href: 'https://github.com/webwithk' },
               { icon: MessageCircle, href: 'https://wa.me/918209990176' },
               { icon: Instagram, href: 'https://instagram.com/kartavya_panwar.9?igsh=MWFpYzN2MTR5bWVxNg==' }
             ].map((social, i) => (
