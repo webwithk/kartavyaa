@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, MessageCircle, Instagram } from 'lucide-react';
+import { ArrowRight, MessageCircle, Instagram, Mail } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -65,6 +65,7 @@ export default function Hero() {
             className="mt-16 flex items-center justify-center gap-6"
           >
             {[
+              { icon: Mail, href: 'mailto:kartavyasinghpanwar44@gmail.com' },
               { icon: MessageCircle, href: 'https://wa.me/918209990176' },
               { icon: Instagram, href: 'https://instagram.com/kartavya_panwar.9?igsh=MWFpYzN2MTR5bWVxNg==' }
             ].map((social, i) => (
