@@ -23,15 +23,6 @@ export default function Hero() {
             >
               KARTAVYA
             </motion.h1>
-            
-            <motion.h1 
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[18vw] leading-[0.85] tracking-tighter text-outline text-center w-full"
-            >
-              SINGH PANWAR
-            </motion.h1>
 
             {/* Bottom Row */}
             <motion.div 
