@@ -1,91 +1,59 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { supabase } from '../lib/supabase';
-
-interface ExpertiseItem {
-  id: number;
-  icon: string;
-  title: string;
-  description: string;
-}
+import { ArrowRight } from 'lucide-react';
 
 export default function Expertise() {
-  const [expertise, setExpertise] = useState<ExpertiseItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchExpertise = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('portfolio_expertise')
-          .select('*');
-
-        if (error) {
-          console.error('Error fetching expertise:', error);
-        } else {
-          setExpertise(data);
-        }
-      } catch (err) {
-        console.error('Error fetching expertise:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchExpertise();
-  }, []);
-
   return (
-    <section id="expertise" className="py-24 relative bg-slate-900/30">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+    <section id="expertise" className="py-32 relative bg-[#171e19] text-white overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 max-w-[90rem]">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left: Asymmetric Image */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-4"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
           >
-            My <span className="text-gradient">Expertise</span>
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-slate-400 text-lg"
-          >
-            Specialized skills and core competencies I bring to every project.
-          </motion.p>
-        </div>
+            {/* Cyan Decorative Square */}
+            <div className="absolute -top-12 -left-12 w-full h-full bg-[#d5f4f9] opacity-20 z-0"></div>
+            
+            <div className="relative z-10 aspect-[4/5] overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                alt="Workspace" 
+                className="w-full h-full object-cover filter grayscale"
+              />
+            </div>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {loading ? (
-            Array(4).fill(0).map((_, i) => (
-              <div key={i} className="glass-panel p-8 rounded-2xl animate-pulse h-64"></div>
-            ))
-          ) : (
-            expertise.map((item, index) => {
-              const IconComponent = Icons[item.icon as keyof typeof Icons] as React.ComponentType<{ size?: number }> || Icons.Code;
-              return (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="glass-panel p-8 rounded-2xl hover:bg-slate-800/40 transition-all duration-300 group"
-                >
-                  <div className="w-14 h-14 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <IconComponent size={28} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 text-slate-200">{item.title}</h3>
-                  <p className="text-slate-400 leading-relaxed text-sm">
-                    {item.description}
-                  </p>
-                </motion.div>
-              );
-            })
-          )}
+          {/* Right: Content */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:pl-12"
+          >
+            <span className="font-heading text-[#b7c6c2] text-xl uppercase tracking-widest block mb-6">Featured Focus</span>
+            
+            <h2 className="text-5xl md:text-7xl font-heading tracking-tighter leading-[0.9] mb-8">
+              CRAFTING PIXEL-PERFECT INTERFACES
+            </h2>
+            
+            <p className="text-[#9f8d8b] text-lg font-light leading-relaxed mb-12 max-w-lg">
+              I specialize in transforming complex problems into elegant, intuitive designs. Every line of code is written with performance, accessibility, and the end-user in mind.
+            </p>
+
+            <a href="#contact" className="inline-flex items-center gap-4 text-white font-bold tracking-widest uppercase text-sm group">
+              Start a Project 
+              <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-[#171e19] transition-all duration-300">
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+            </a>
+          </motion.div>
+
         </div>
       </div>
     </section>

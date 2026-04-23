@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface Service {
@@ -38,32 +37,26 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" className="py-24 relative bg-slate-900/30">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+    <section id="services" className="py-32 relative bg-[#171e19] overflow-hidden border-t border-white/5">
+      {/* Deep Purple Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] bg-[#7c3aed] rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-24">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-6xl md:text-8xl font-heading tracking-tighter mb-6 leading-none text-white"
           >
-            Services & <span className="text-gradient">Pricing</span>
+            SERVICES & PRICING
           </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-slate-400 text-lg"
-          >
-            Flexible packages tailored to meet your specific project needs.
-          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[90rem] mx-auto">
           {loading ? (
             Array(4).fill(0).map((_, i) => (
-              <div key={i} className="glass-panel rounded-2xl animate-pulse h-[400px]"></div>
+              <div key={i} className="border border-white/10 animate-pulse h-[500px] bg-white/5"></div>
             ))
           ) : (
             services.map((service, index) => (
@@ -72,47 +65,51 @@ export default function Services() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative glass-panel rounded-2xl p-8 flex flex-col h-full ${
+                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className={`relative p-10 flex flex-col h-full border transition-all duration-500 ${
                   service.recommended 
-                    ? 'border-sky-500/50 shadow-[0_0_30px_rgba(56,189,248,0.15)] transform md:-translate-y-4' 
-                    : 'border-slate-800/50'
+                    ? 'bg-white text-[#111111] border-white scale-105 z-10' 
+                    : 'bg-white/5 backdrop-blur-md border-white/10 text-white hover:bg-white/10'
                 }`}
               >
                 {service.recommended && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-custom text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
-                    Recommended
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#171e19] text-white text-xs font-bold px-6 py-2 tracking-[0.2em] uppercase border border-white/20">
+                    RECOMMENDED
                   </div>
                 )}
                 
-                <h3 className="text-xl font-bold text-slate-200 mb-2">{service.tier}</h3>
-                <div className="mb-6">
-                  <span className="text-2xl font-bold text-white">{service.price}</span>
+                <h3 className={`text-3xl font-heading uppercase tracking-wide mb-6 ${service.recommended ? 'text-[#111111]' : 'text-[#b7c6c2]'}`}>
+                  {service.tier}
+                </h3>
+                <div className="mb-10 pb-10 border-b border-current opacity-20">
+                  <span className={`text-2xl font-bold ${service.recommended ? 'text-[#111111]' : 'text-white'}`}>
+                    {service.price}
+                  </span>
                 </div>
                 
-                <ul className="space-y-4 mb-8 flex-grow">
+                <ul className="space-y-5 mb-12 flex-grow">
                   {service.features.map((feature: string, i: number) => (
-                    <li key={i} className="flex items-start gap-3 text-slate-300 text-sm">
-                      <Check size={18} className="text-sky-400 shrink-0 mt-0.5" />
-                      <span>{feature}</span>
+                    <li key={i} className={`text-sm font-medium tracking-wide ${service.recommended ? 'text-[#333333]' : 'text-[#9f8d8b]'}`}>
+                      {feature}
                     </li>
                   ))}
                 </ul>
                 
                 <a 
                   href="#contact"
-                  className={`w-full py-3 rounded-xl font-medium text-center transition-all ${
+                  className={`w-full py-5 font-bold tracking-widest text-center uppercase transition-all ${
                     service.recommended
-                      ? 'bg-gradient-custom text-white hover:shadow-[0_0_20px_rgba(56,189,248,0.4)]'
-                      : 'bg-slate-800 text-slate-200 hover:bg-slate-700'
+                      ? 'bg-[#171e19] text-white hover:bg-black'
+                      : 'border border-white/20 hover:bg-white hover:text-[#171e19]'
                   }`}
                 >
-                  Choose {service.tier}
+                  Select Plan
                 </a>
               </motion.div>
             ))
           )}
         </div>
+
       </div>
     </section>
   );

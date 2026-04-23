@@ -1,77 +1,60 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
+import TubesBackground from './TubesBackground';
 
 export default function Hero() {
   return (
-    <section id="home" className="h-screen w-full relative overflow-hidden bg-[#050505] flex items-center justify-center" style={{ perspective: '2000px' }}>
-      {/* Massive Background Text */}
-      <motion.div 
-        className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 2 }}
-      >
-        <h1 className="text-[20vw] font-black tracking-tighter text-white whitespace-nowrap opacity-30 select-none">
-          KARTAVYA
-        </h1>
-      </motion.div>
-
-      {/* 3D Rolodex Cube */}
-      <div className="relative w-[80vw] h-[80vw] md:w-[40vh] md:h-[40vh] z-10 cube-wrapper">
+    <TubesBackground className="bg-[#171e19]">
+      <section id="home" className="h-screen w-full relative overflow-hidden flex flex-col justify-center">
         
-        {/* Front Face */}
-        <div className="cube-face md:[&]:![transform:rotateX(0deg)_translateZ(20vh)]" style={{ transform: 'rotateX(0deg) translateZ(40vw)' }}>
-          <div className="w-full h-full relative border border-white/10 overflow-hidden group">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Code" className="w-full h-full object-cover grayscale-hover" />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <h2 className="text-2xl md:text-4xl font-black tracking-[0.2em] text-white">DEVELOPER</h2>
-            </div>
+        {/* Ambient Background Orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#b7c6c2] rounded-full blur-[120px] opacity-20 animate-float pointer-events-none"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#bbe2f5] rounded-full blur-[120px] opacity-20 animate-float pointer-events-none" style={{ animationDelay: '3s' }}></div>
+
+        <div className="container mx-auto px-6 md:px-12 relative z-10 w-full">
+          <div className="flex flex-col items-center justify-center w-full mt-20">
+            
+            {/* Massive Typography */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[18vw] leading-[0.85] tracking-tighter text-white text-center w-full"
+            >
+              KARTAVYA
+            </motion.h1>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[18vw] leading-[0.85] tracking-tighter text-outline text-center w-full"
+            >
+              SINGH PANWAR
+            </motion.h1>
+
+            {/* Bottom Row */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="w-full flex flex-col md:flex-row justify-between items-center mt-16 md:mt-24 gap-8"
+            >
+              <p className="text-[#9f8d8b] uppercase tracking-widest text-xs md:text-sm font-semibold max-w-[320px] text-center md:text-left leading-relaxed">
+                A passionate Web Developer focused on crafting clean, responsive, and user-centric applications with modern technologies.
+              </p>
+
+              <a 
+                href="#portfolio" 
+                className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-[#171e19] transition-all duration-500 ease-fluid group"
+              >
+                <ArrowDown size={24} strokeWidth={1.5} className="group-hover:animate-bounce" />
+              </a>
+            </motion.div>
+
           </div>
         </div>
-
-        {/* Bottom Face */}
-        <div className="cube-face md:[&]:![transform:rotateX(-90deg)_translateZ(20vh)]" style={{ transform: 'rotateX(-90deg) translateZ(40vw)' }}>
-          <div className="w-full h-full relative border border-white/10 overflow-hidden group">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Design" className="w-full h-full object-cover grayscale-hover" />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <h2 className="text-2xl md:text-4xl font-black tracking-[0.2em] text-white">DESIGNER</h2>
-            </div>
-          </div>
-        </div>
-
-        {/* Back Face */}
-        <div className="cube-face md:[&]:![transform:rotateX(-180deg)_translateZ(20vh)]" style={{ transform: 'rotateX(-180deg) translateZ(40vw)' }}>
-          <div className="w-full h-full relative border border-white/10 overflow-hidden group">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Code" className="w-full h-full object-cover grayscale-hover" />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <h2 className="text-2xl md:text-4xl font-black tracking-[0.2em] text-white">CREATOR</h2>
-            </div>
-          </div>
-        </div>
-
-        {/* Top Face */}
-        <div className="cube-face md:[&]:![transform:rotateX(90deg)_translateZ(20vh)]" style={{ transform: 'rotateX(90deg) translateZ(40vw)' }}>
-          <div className="w-full h-full relative border border-white/10 overflow-hidden group">
-            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="UI" className="w-full h-full object-cover grayscale-hover" />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <h2 className="text-2xl md:text-4xl font-black tracking-[0.2em] text-white">ENGINEER</h2>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Bottom Floating CTA */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
-      >
-        <a href="#portfolio" className="flex items-center gap-4 text-sm font-bold tracking-[0.2em] uppercase text-white hover:text-cyan-400 transition-colors">
-          Scroll to Explore <ArrowRight size={16} className="animate-bounce-x" />
-        </a>
-      </motion.div>
-    </section>
+      </section>
+    </TubesBackground>
   );
 }

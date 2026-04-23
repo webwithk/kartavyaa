@@ -1,4 +1,57 @@
-/* 3D Cube Animation */
+@import "tailwindcss";
+
+:root {
+  --color-primary: #171e19;
+  --color-secondary: #302b2f;
+  --color-accent: #b7c6c2;
+  --color-highlight: #d5f4f9;
+  --color-background: #171e19;
+  --color-taupe: #9f8d8b;
+  --color-beige: #d7c5b2;
+  --color-soft-blue: #bbe2f5;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-heading: "Anton", sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px #b7c6c2;
+}
+
+.mix-blend-diff {
+  mix-blend-mode: difference;
+}
+
+/* Fluid easing */
+.ease-fluid {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ambient Background Orbs Animation */
+@keyframes floatOrb {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: floatOrb 6s ease-in-out infinite;
+}
+
+/* 3D Cube Animation (keeping for Hero TubesBackground if needed) */
 @keyframes rotateCube {
   0% { transform: rotateX(0deg); }
   100% { transform: rotateX(360deg); }

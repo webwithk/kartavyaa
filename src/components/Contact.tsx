@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Phone } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 export default function Contact() {
@@ -37,51 +37,51 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section id="contact" className="py-32 relative bg-[#fafafa] text-[#171e19]">
+      <div className="container mx-auto px-6 md:px-12 max-w-[90rem]">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Let's <span className="text-gradient">Connect</span>
+            <h2 className="text-6xl md:text-8xl font-heading tracking-tighter mb-8 leading-none uppercase">
+              LET'S START A PROJECT
             </h2>
-            <p className="text-slate-400 text-lg mb-10">
-              Have a project in mind or just want to say hi? Feel free to reach out. I'm currently available for new opportunities.
+            <p className="text-[#9f8d8b] font-medium text-lg mb-12 max-w-md">
+              I'm currently available for freelance work. If you have a project that needs some creative magic, I'd love to hear about it.
             </p>
             
             <div className="space-y-6">
-              {[
-                { icon: Mail, label: 'Email', value: 'kartavyasinghpanwar44@gmail.com' },
-                { icon: MapPin, label: 'Location', value: 'India' },
-                { icon: Phone, label: 'Phone', value: '+91 8209990176' }
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-xl glass-panel flex items-center justify-center text-sky-400 group-hover:bg-sky-500/10 transition-colors">
-                    <item.icon size={20} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500 font-medium">{item.label}</p>
-                    <p className="text-slate-200">{item.value}</p>
-                  </div>
+              <div>
+                <p className="text-xs font-bold tracking-widest uppercase text-[#9f8d8b] mb-2">Email</p>
+                <a href="mailto:kartavyasinghpanwar44@gmail.com" className="text-xl font-semibold hover:text-[#b7c6c2] transition-colors">kartavyasinghpanwar44@gmail.com</a>
+              </div>
+              <div>
+                <p className="text-xs font-bold tracking-widest uppercase text-[#9f8d8b] mb-2">Socials</p>
+                <div className="flex gap-6">
+                  <a href="mailto:kartavyasinghpanwar44@gmail.com" className="text-sm font-bold tracking-widest uppercase hover:text-[#b7c6c2] transition-colors">Mail</a>
+                  <a href="https://wa.me/918209990176" className="text-sm font-bold tracking-widest uppercase hover:text-[#b7c6c2] transition-colors">Whatsapp</a>
+                  <a href="https://www.instagram.com/kartavya_panwar.9?igsh=MWFpYzN2MTR5bWVxNg==" className="text-sm font-bold tracking-widest uppercase hover:text-[#b7c6c2] transition-colors">Instagram</a>
                 </div>
-              ))}
+              </div>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7"
           >
-            <form onSubmit={handleSubmit} className="glass-panel p-8 rounded-2xl space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-8 bg-white p-10 md:p-16 border border-[#171e19]/10">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">Name</label>
+                <label htmlFor="name" className="block text-xs font-bold tracking-widest uppercase text-[#9f8d8b] mb-4">Name</label>
                 <input
                   type="text"
                   id="name"
@@ -89,13 +89,13 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
-                  placeholder="John Doe"
+                  className="w-full bg-transparent border-b border-[#171e19]/20 pb-4 text-[#171e19] placeholder-[#171e19]/30 focus:outline-none focus:border-[#171e19] transition-all font-medium text-lg"
+                  placeholder="What's your name?"
                 />
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                <label htmlFor="email" className="block text-xs font-bold tracking-widest uppercase text-[#9f8d8b] mb-4">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -103,13 +103,13 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
-                  placeholder="john@example.com"
+                  className="w-full bg-transparent border-b border-[#171e19]/20 pb-4 text-[#171e19] placeholder-[#171e19]/30 focus:outline-none focus:border-[#171e19] transition-all font-medium text-lg"
+                  placeholder="Your email address"
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                <label htmlFor="message" className="block text-xs font-bold tracking-widest uppercase text-[#9f8d8b] mb-4">Message</label>
                 <textarea
                   id="message"
                   name="message"
@@ -117,7 +117,7 @@ export default function Contact() {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all resize-none"
+                  className="w-full bg-transparent border-b border-[#171e19]/20 pb-4 text-[#171e19] placeholder-[#171e19]/30 focus:outline-none focus:border-[#171e19] transition-all font-medium text-lg resize-none"
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
@@ -125,18 +125,18 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status.submitting}
-                className="w-full py-4 rounded-xl bg-gradient-custom text-white font-medium flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full py-6 bg-[#171e19] text-white font-bold tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-[#302b2f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed mt-8"
               >
                 {status.submitting ? 'Sending...' : (
-                  <>Send Message <Send size={18} /></>
+                  <>Send Message <Send size={20} strokeWidth={1.5} /></>
                 )}
               </button>
               
               {status.success && (
-                <p className="text-emerald-400 text-sm text-center">Message sent successfully! I'll get back to you soon.</p>
+                <p className="text-green-600 text-sm font-bold tracking-wider uppercase text-center mt-6">Message sent successfully!</p>
               )}
               {status.error && (
-                <p className="text-red-400 text-sm text-center">Failed to send message. Please try again.</p>
+                <p className="text-red-600 text-sm font-bold tracking-wider uppercase text-center mt-6">Failed to send message.</p>
               )}
             </form>
           </motion.div>

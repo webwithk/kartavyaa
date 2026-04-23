@@ -19,48 +19,48 @@ export default function Navbar() {
     { name: 'Expertise', href: '#expertise' },
     { name: 'Portfolio', href: '#portfolio' },
     { name: 'Services', href: '#services' },
-    { name: 'Contact', href: '#contact' },
   ];
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-3 glass-panel border-b border-slate-800/50 shadow-lg shadow-black/20' : 'py-5 bg-transparent border-transparent'
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 mix-blend-diff ${
+        isScrolled ? 'py-4 px-6 md:px-12' : 'py-8 px-6 md:px-12'
       }`}
     >
-      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-custom flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-sky-500/20 group-hover:shadow-sky-500/40 transition-all">
-            KSP
+      <div className="flex items-center justify-between">
+        <a href="#" className="flex items-center gap-3 group">
+          <div className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
           </div>
-          <span className="font-heading font-semibold text-lg tracking-wide hidden sm:block">Kartavya</span>
+          <span className="font-heading text-2xl tracking-[0.1em] text-white">KSP</span>
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-sky-400 transition-colors"
+              className="text-[12px] font-semibold tracking-widest uppercase text-white hover:text-[#b7c6c2] transition-colors duration-300 ease-fluid"
             >
               {link.name}
             </a>
           ))}
           <a 
-            href="tel:+918209990176" 
-            className="px-5 py-2 rounded-full bg-slate-800 border border-slate-700 hover:border-sky-500/50 text-sm font-medium transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] flex items-center gap-2"
+            href="#contact" 
+            className="px-6 py-3 border border-white text-white text-[12px] font-semibold tracking-widest uppercase hover:bg-white hover:text-[#171e19] transition-all duration-300 ease-fluid"
           >
-            Let's Talk
+            Get in Touch
           </a>
         </nav>
 
         {/* Mobile Menu Toggle */}
         <button 
-          className="md:hidden text-slate-300 hover:text-white"
+          className="md:hidden text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileMenuOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
         </button>
       </div>
 
@@ -71,18 +71,25 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 glass-panel border-b border-slate-800/50 p-6 flex flex-col gap-4 shadow-2xl md:hidden"
+            className="absolute top-full left-0 right-0 bg-[#171e19] border-b border-white/10 p-6 flex flex-col gap-6 shadow-2xl md:hidden !mix-blend-normal"
           >
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-slate-300 hover:text-sky-400 py-2 border-b border-slate-800/50"
+                className="text-lg font-bold tracking-widest uppercase text-white hover:text-[#b7c6c2] py-2 border-b border-white/10"
               >
                 {link.name}
               </a>
             ))}
+            <a 
+              href="#contact" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-6 py-4 mt-4 border border-white text-white text-center font-bold tracking-widest uppercase hover:bg-white hover:text-[#171e19] transition-all"
+            >
+              Get in Touch
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

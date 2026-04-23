@@ -1,38 +1,23 @@
-import { MessageCircle, Instagram, Mail } from 'lucide-react';
-
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-8 border-t border-slate-800/50 bg-slate-950/50">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+    <footer className="pt-32 pb-12 bg-[#171e19] text-white">
+      <div className="container mx-auto px-6 md:px-12 max-w-[90rem]">
+        
+        <div className="mb-32">
+          <h2 className="text-[15vw] leading-[0.8] font-heading tracking-tighter uppercase mb-8">
+            LET'S CREATE
+          </h2>
+          <a href="mailto:kartavyasinghpanwar44@gmail.com" className="text-4xl md:text-6xl font-heading text-[#b7c6c2] hover:text-white transition-colors underline underline-offset-8 decoration-2">
+            HELLO@KARTAVYA.DEV
+          </a>
+        </div>
+
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pt-8 border-t border-white/10">
           
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-custom flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-sky-500/20">
-              KSP
-            </div>
-            <span className="font-heading font-semibold text-slate-200">Kartavya Singh Panwar</span>
-          </div>
-          
-          <div className="text-slate-500 text-sm">
-            &copy; {currentYear} All rights reserved.
-          </div>
-          
-          <div className="flex items-center gap-4">
-            {[
-              { icon: Mail, href: 'mailto:kartavyasinghpanwar44@gmail.com' },
-              { icon: MessageCircle, href: 'https://wa.me/918209990176' },
-              { icon: Instagram, href: 'https://instagram.com/kartavya_panwar.9?igsh=MWFpYzN2MTR5bWVxNg==' }
-            ].map((social, i) => (
-              <a 
-                key={i} 
-                href={social.href}
-                className="text-slate-500 hover:text-sky-400 transition-colors"
-              >
-                <social.icon size={18} />
-              </a>
-            ))}
+          <div className="text-white/50 text-[10px] font-bold tracking-widest uppercase">
+            &copy; {currentYear} KARTAVYA SINGH PANWAR. ALL RIGHTS RESERVED.
           </div>
           
         </div>
