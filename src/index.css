@@ -1,40 +1,17 @@
-@import "tailwindcss";
-
-@theme {
-  --color-primary: #0F172A;
-  --color-secondary: #1E293B;
-  --color-accent: #38BDF8;
-  --color-highlight: #6366F1;
-  --color-background: #020617;
-  --font-sans: "Inter", sans-serif;
-  --font-heading: "Poppins", sans-serif;
+/* 3D Cube Animation */
+@keyframes rotateCube {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(360deg); }
 }
 
-body {
-  background-color: var(--color-background);
-  color: #E2E8F0;
-  font-family: var(--font-sans);
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+.cube-wrapper {
+  transform-style: preserve-3d;
+  animation: rotateCube 20s infinite linear;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-}
-
-.glass-panel {
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(56, 189, 248, 0.1);
-}
-
-.text-gradient {
-  background: linear-gradient(135deg, #38BDF8, #6366F1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.bg-gradient-custom {
-  background: linear-gradient(135deg, #38BDF8, #6366F1);
+.cube-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
 }
