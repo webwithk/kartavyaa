@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useInView, animate } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 
 interface Stat {
@@ -33,6 +33,7 @@ export default function About() {
     };
     fetchStats();
   }, []);
+
   return (
     <section id="about" className="py-32 relative bg-[#fafafa] text-[#171e19]">
       <div className="container mx-auto px-6 md:px-12 max-w-[90rem]">
@@ -73,7 +74,9 @@ export default function About() {
               ) : (
                 stats.map((stat) => (
                   <div key={stat.id}>
-                    <h3 className="text-4xl md:text-5xl font-heading mb-2 text-[#171e19]">{stat.value}</h3>
+                    <h3 className="text-4xl md:text-5xl font-heading mb-2 text-[#171e19]">
+                      <AnimatedCounter value={stat.value} />
+                    </h3>
                     <p className="text-[#9f8d8b] font-bold text-xs uppercase tracking-widest">{stat.label}</p>
                   </div>
                 ))
@@ -85,4 +88,33 @@ export default function About() {
       </div>
     </section>
   );
+}
+
+function AnimatedCounter({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  
+  // Parse the number and any suffix (like +, %, k+)
+  const match = value.match(/^(\d+)(.*)$/);
+  const targetNumber = match ? parseInt(match[1], 10) : null;
+  const suffix = match ? match[2] : '';
+
+  useEffect(() => {
+    if (inView && targetNumber !== null && ref.current) {
+      const controls = animate(0, targetNumber, {
+        duration: 2.5,
+        ease: [0.16, 1, 0.3, 1], // Fluid cinematic easing
+        onUpdate(val) {
+          if (ref.current) {
+            ref.current.textContent = Math.floor(val) + suffix;
+          }
+        }
+      });
+      return () => controls.stop();
+    }
+  }, [inView, targetNumber, suffix]);
+
+  if (targetNumber === null) return <span>{value}</span>;
+
+  return <span ref={ref}>0{suffix}</span>;
 }
